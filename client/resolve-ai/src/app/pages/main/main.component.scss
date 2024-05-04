@@ -1,0 +1,44 @@
+header {
+    background-color: rgb(168, 198, 253);
+    height: 6.5rem;
+    display: flex;
+    justify-content: center;
+
+    img {
+        height: 11rem;
+        margin-bottom: 3rem;
+    }
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    width: 100vw;
+
+    .main-container {
+        display: flex;
+        justify-content: center;
+        flex: 0 0 40%;
+        height: 100%;
+        background-color: blue;
+        padding-top: 2rem;
+
+        &__hint {
+            display: flex;
+            align-items: center;
+
+            img {
+                height: 3rem;
+                width: 3rem;
+                margin-right: 1rem;
+                margin-bottom: .4rem;
+            }
+
+
+            p {
+                color: #0688FF;
+                font-size: 3rem;
+            }
+        }
+    }
+}
