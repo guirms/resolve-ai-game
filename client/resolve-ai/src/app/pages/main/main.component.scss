@@ -1,3 +1,7 @@
+p {
+    color: white;
+}
+
 header {
     background-color: rgb(168, 198, 253);
     height: 6rem;
@@ -75,11 +79,19 @@ main {
                 &--number {
                     color: #D36804;
                 }
-
-                &--text {
-                    color: white;
-                }
             }
+        }
+
+        &__new-hint {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin-top: 3rem;
+            font-size: 1.4rem;
+            border-radius: .5rem;
+            background-color: #006115;
+            width: 11rem;
+            height: 2.5rem;
         }
     }
 }
