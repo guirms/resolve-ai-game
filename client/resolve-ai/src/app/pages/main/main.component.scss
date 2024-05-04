@@ -47,16 +47,39 @@ main {
             }
         }
 
-        &--guess {
-            margin-top: 3rem;
-        }
+        &__guess {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
 
-        &--main-input {
-            height: 3.5rem;
-            width: 10rem;
-            margin-top: .5rem;
-            border-radius: .5rem;
-            border: solid 5px #448fff;
+            &--title {
+                margin-top: 3rem;
+            }
+    
+            &--input {
+                height: 3.5rem;
+                width: 10rem;
+                margin-top: .5rem;
+                border-radius: .5rem;
+                border: solid 5px #448fff;
+                font-size: 3rem;
+                text-align: center;
+            }
+
+            &__remaining-hints {
+                display: flex;
+                justify-content: center;
+                font-size: 1.4rem;
+                gap: 10px;                
+
+                &--number {
+                    color: #D36804;
+                }
+
+                &--text {
+                    color: white;
+                }
+            }
         }
     }
 }

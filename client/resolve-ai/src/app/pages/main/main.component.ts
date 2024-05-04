@@ -9,4 +9,5 @@ import { Component } from '@angular/core';
 })
 export class MainComponent {
   hintContent: string = 'É o quarto número primo começando em 0';
+  remainingHints: string = '7';
 }

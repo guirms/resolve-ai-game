@@ -15,9 +15,16 @@
                 <u>É o quarto número primo começando em 0</u>
             </div>
 
-            <p class="container--guess blue-text">PALPITE:</p>
+            <div class="container__guess">
+                <p class="container__guess--title blue-text">PALPITE:</p>
 
-            <input type="text" class="container--main-input">
+                <input type="number" class="container__guess--input">
+
+                <div class="container__guess__remaining-hints">
+                    <p class="container__guess__remaining-hints--number">{{ remainingHints }}</p>
+                    <p class="container__guess__remaining-hints--text">Dicas restantes</p>
+                </div>
+            </div>
         </section>
     </main>
 </body>
