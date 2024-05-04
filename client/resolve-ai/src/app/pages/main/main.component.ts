@@ -8,5 +8,5 @@ import { Component } from '@angular/core';
   styleUrl: './main.component.scss'
 })
 export class MainComponent {
-
+  hintContent: string = 'É o quarto número primo começando em 0';
 }
