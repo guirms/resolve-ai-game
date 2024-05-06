@@ -1,0 +1,25 @@
+<body>
+    <header>
+        <img src="assets/img/resolve-ai-logo.png" alt="Logo resolve aí">
+    </header>
+
+    <main>
+        <section class="container">
+            <div class="container__register">
+                <p class="blue-text">NOVO POR AQUI?</p>
+
+                <input type="number" class="container__register--input" placeholder="Digite seu nome">
+
+                <select class="container__register--input">
+                    <option *ngFor="let country of contryList" [value]="country.value" [selected]="country.isSelected">{{ country.name }}</option>
+                  </select>
+            </div>
+
+            <button class="container__submit-btn">
+                <p>CRIAR CONTA</p>
+
+                <img src="assets/icon/check.svg">
+            </button>
+        </section>
+    </main>
+</body>

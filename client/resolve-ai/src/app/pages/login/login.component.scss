@@ -28,74 +28,43 @@ main {
         height: 100%;
         padding-top: 2rem;
 
-        &__hint {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-
-            &__title {
-                display: flex;
-                align-items: center;
-
-                img {
-                    height: 3rem;
-                    width: 3rem;
-                    margin-right: 1rem;
-                    margin-bottom: .4rem;
-                }
-            }
-
-            u {
-                color: white;
-                font-size: 2rem;
-            }
-        }
-
-        &__guess {
+        &__register {
             display: flex;
             flex-direction: column;
             align-items: center;
 
-            &--title {
-                margin-top: 3rem;
-            }
-    
             &--input {
-                height: 3.5rem;
-                width: 10rem;
+                height: 2rem;
+                width: 18rem;
                 margin-top: .5rem;
                 border-radius: .5rem;
                 border: solid 5px #448fff;
-                font-size: 3rem;
-                text-align: center;
+                font-size: 1.5rem;
                 outline: none;
-            }
-
-            &__remaining-hints {
-                display: flex;
-                justify-content: center;
-                font-size: 1.4rem;
-                gap: 10px;                
-
-                &--number {
-                    color: #D36804;
-                }
+                
+                -ms-box-sizing: content-box;
+                -moz-box-sizing: content-box;
+                box-sizing: content-box;
+                -webkit-box-sizing: content-box;
             }
         }
 
-        &__new-hint-btn {
+        &__submit-btn {
             cursor: pointer;
             display: flex;
             justify-content: space-around;
             align-items: center;
-            margin-top: 3rem;
+            margin-top: 2rem;
             font-size: 1.4rem;
             border-radius: .5rem;
             background-color: #006115;
             width: 11rem;
             height: 2.5rem;
             border: solid 1px #051f00;
+
+            img {
+                height: 1.5rem;
+            }
         }
     }
 }
@@ -109,6 +78,10 @@ main {
     main {
         .container {
             flex: 1;
+
+            &__register {
+                text-align: center;
+            }
         }
     }
 
