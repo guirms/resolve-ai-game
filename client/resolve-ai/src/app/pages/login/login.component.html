@@ -5,18 +5,28 @@
 
     <main>
         <section class="container">
-            <div class="container__register">
+            <div *ngIf="!isLoggedIn" class="container__register">
                 <p class="blue-text">NOVO POR AQUI?</p>
 
                 <input type="number" class="container__register--input" placeholder="Digite seu nome">
 
+                <input type="password" class="container__register--input" placeholder="Digite sua senha">
+
                 <select class="container__register--input">
-                    <option *ngFor="let country of contryList" [value]="country.value" [selected]="country.isSelected">{{ country.name }}</option>
+                    <option *ngFor="let country of countryList" [value]="country.value" [selected]="country.isSelected">{{ country.name }}</option>
                   </select>
             </div>
 
+            <div *ngIf="isLoggedIn" class="container__register">
+                <p class="blue-text">ACESSAR CONTA</p>
+
+                <input type="number" class="container__register--input" placeholder="Digite seu nome">
+
+                <input type="password" class="container__register--input" placeholder="Digite sua senha">
+            </div>
+
             <button class="container__submit-btn">
-                <p>CRIAR CONTA</p>
+                <p>{{ buttonText }}</p>
 
                 <img src="assets/icon/check.svg">
             </button>
