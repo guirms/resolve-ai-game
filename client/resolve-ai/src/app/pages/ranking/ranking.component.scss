@@ -3,13 +3,20 @@ p {
 }
 
 header {
-    background-color: rgb(168, 198, 253);
-    height: 6rem;
+    background-color: rgb(168, 198, 253);    
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1rem;
 
-    img {
-        height: 11rem;
+    .logo {
+        cursor: pointer;
+        height: 4rem;
+    }
+
+    .game {
+        cursor: pointer;
+        height: 4rem;
     }
 }
 
@@ -32,6 +39,10 @@ main {
             margin-top: 3rem;
             width: 100%;
             border-collapse: collapse;
+            overflow: hidden;
+            -webkit-border-radius: .8rem;
+            -moz-border-radius: .8rem;
+            border-radius: .8rem;
         }
 
         th,
@@ -74,10 +85,12 @@ main {
     }
 
     header {
-        height: 5rem;
+        .logo {
+            height: 3rem;
+        }
 
-        img {
-            height: 9rem;
+        .game {
+            height: 3rem;
         }
     }
 

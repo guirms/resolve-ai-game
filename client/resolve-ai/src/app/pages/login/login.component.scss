@@ -3,13 +3,20 @@ p {
 }
 
 header {
-    background-color: rgb(168, 198, 253);
-    height: 6rem;
+    background-color: rgb(168, 198, 253);    
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1rem;
 
-    img {
-        height: 11rem;
+    .logo {
+        cursor: pointer;
+        height: 4rem;
+    }
+
+    .game {
+        cursor: pointer;
+        height: 4rem;
     }
 }
 
@@ -86,10 +93,12 @@ main {
     }
 
     header {
-        height: 5rem;
+        .logo {
+            height: 3rem;
+        }
 
-        img {
-            height: 9rem;
+        .game {
+            height: 3rem;
         }
     }
 

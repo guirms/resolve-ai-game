@@ -8,7 +8,7 @@ export const routes: Routes = [
     {
       path: '',
       pathMatch: 'full',
-      component: RankingComponent
+      component: LoginComponent
     },
     {
       path: ERoutePath[0],

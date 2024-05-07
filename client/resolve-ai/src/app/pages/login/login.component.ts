@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CountyInfo } from '../../components/data-types/dto';
 import { environment } from '../../../environments/environment.development';
+import { BaseService } from '../../services/base/base.service';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,7 @@ export class LoginComponent {
   buttonText!: string;
   countryList: CountyInfo[] = [];
 
-  constructor() {
+  constructor(public baseService: BaseService) {
     this.buttonText = this.isLoggedIn ? 'ENTRAR' : 'CRIAR CONTA';
 
     environment.countryList.forEach(c => {
