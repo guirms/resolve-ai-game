@@ -3,3 +3,8 @@ export interface CountyInfo {
     value: number;
     isSelected: boolean;
 }
+
+export interface DayContent {
+    number: number;
+    hints: string[]; 
+}
