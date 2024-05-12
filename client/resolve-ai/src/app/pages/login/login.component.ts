@@ -1,4 +1,3 @@
-import { NgFor, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CountyInfo } from '../../components/data-types/dto';
@@ -8,7 +7,7 @@ import { BaseService } from '../../services/base/base.service';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, NgFor, NgIf],
+  imports: [FormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })

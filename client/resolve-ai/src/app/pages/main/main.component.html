@@ -14,24 +14,35 @@
                     <p class="blue-text">DICA:</p>
                 </div>
 
-                <u>É o quarto número primo começando em 0</u>
+                <u>{{ currentNumber.hint }}</u>
+
+                <button class="container__new-hint-btn" (click)="changeHint()">
+                    <p>NOVA DICA</p>   
+                    
+                    <img src="assets/icon/refresh.svg">
+                </button>
             </div>
 
             <div class="container__guess">
                 <p class="container__guess--title blue-text">PALPITE:</p>
 
-                <input type="number" class="container__guess--input">
+                <input type="number" class="container__guess--input" [(ngModel)]="guessNumber">
 
-                <div class="container__guess__remaining-hints">
-                    <p class="container__guess__remaining-hints--number">{{ remainingHints }}</p>
-                    <p>Dicas restantes</p>
+                <div class="container__guess__total-remaining-hints">
+                    <p class="container__guess__total-remaining-hints--number">{{ totalRemainingHints }}</p>
+                    <p>Dica(s) totais restantes</p>
+                </div>
+
+                <div class="container__guess__number-remaining-hints">
+                    <p class="container__guess__number-remaining-hints--number">{{ numberRemainingHints }}</p>
+                    <p>Dica(s) por número restantes</p>
                 </div>
             </div>
 
-            <button class="container__new-hint-btn">
-                <p>NOVA DICA</p>   
+            <button class="container__send-guess-btn" (click)="sendGuess()">
+                <p>ENVIAR PALPITE</p>   
                 
-                <img src="assets/icon/refresh.svg">
+                <img src="assets/icon/check.svg">
             </button>
         </section>
     </main>

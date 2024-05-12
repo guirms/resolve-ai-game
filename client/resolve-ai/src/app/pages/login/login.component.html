@@ -1,13 +1,15 @@
 <body>
     <header>
-        <img class="logo" src="assets/img/resolve-ai-logo.png" alt="Logo resolve aí" (click)="baseService.navigateByUrl(0)">
-    
+        <img class="logo" src="assets/img/resolve-ai-logo.png" alt="Logo resolve aí"
+            (click)="baseService.navigateByUrl(0)">
+
         <img class="game" src="assets/icon/game.svg" (click)="baseService.navigateByUrl(0)">
-      </header>
+    </header>
 
     <main>
         <section class="container">
-            <div *ngIf="!isLoggedIn" class="container__register">
+            @if (!isLoggedIn) {
+            <div class="container__register">
                 <p class="blue-text">NOVO POR AQUI?</p>
 
                 <input type="number" class="container__register--input" placeholder="Digite seu nome">
@@ -15,17 +17,24 @@
                 <input type="password" class="container__register--input" placeholder="Digite sua senha">
 
                 <select class="container__register--input">
-                    <option *ngFor="let country of countryList" [value]="country.value" [selected]="country.isSelected">{{ country.name }}</option>
-                  </select>
-            </div>
+                    @for (country of countryList; track country) {
+                        <option [value]="country.value" [selected]="country.isSelected">
+                        {{ country.name }}</option>
+                    }
 
-            <div *ngIf="isLoggedIn" class="container__register">
+                </select>
+            </div>
+            }
+
+            @if (isLoggedIn) {
+            <div class="container__register">
                 <p class="blue-text">ACESSAR CONTA</p>
 
                 <input type="number" class="container__register--input" placeholder="Digite seu nome">
 
                 <input type="password" class="container__register--input" placeholder="Digite sua senha">
             </div>
+            }
 
             <button class="container__submit-btn">
                 <p>{{ buttonText }}</p>
