@@ -16,7 +16,7 @@
 
                 <u>{{ currentNumber.hint }}</u>
 
-                <button class="container__new-hint-btn" (click)="changeHint()">
+                <button class="container__new-hint-btn" (click)="changeHint()" [disabled]="disableButtons">
                     <p>NOVA DICA</p>   
                     
                     <img src="assets/icon/refresh.svg">
@@ -27,6 +27,11 @@
                 <p class="container__guess--title blue-text">PALPITE:</p>
 
                 <input type="number" class="container__guess--input" [(ngModel)]="guessNumber">
+
+                <div class="container__guess__attempts">
+                    <p class="container__guess__attempts--number">{{ numberRemainingAttempts }}</p>
+                    <p>Tentativa(s)</p>
+                </div>
 
                 <div class="container__guess__total-remaining-hints">
                     <p class="container__guess__total-remaining-hints--number">{{ totalRemainingHints }}</p>
@@ -39,7 +44,7 @@
                 </div>
             </div>
 
-            <button class="container__send-guess-btn" (click)="sendGuess()">
+            <button class="container__send-guess-btn" (click)="sendGuess()" [disabled]="disableButtons">
                 <p>ENVIAR PALPITE</p>   
                 
                 <img src="assets/icon/check.svg">

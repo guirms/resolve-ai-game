@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BaseService } from '../../services/base/base.service';
 import { CurrentNumber, DayContent } from '../../components/data-types/dto';
 import { FormsModule } from '@angular/forms';
@@ -52,11 +52,25 @@ export class MainComponent {
 
   totalRemainingHints: number = 9;
   numberRemainingHints: number = 4;
+  numberRemainingAttempts: number = 5;
   guessNumber!: number | null;
+  disableButtons = false;
 
   constructor(public baseService: BaseService) { }
 
   sendGuess(): void {
+    if (!this.guessNumber || isNaN(this.guessNumber)) {
+      alert('Por favor digite um número válido');
+      return;
+    }
+
+    if (this.numberRemainingAttempts === 0) {
+      this.guessNumber = null;
+      this.disableButtons = true;
+      alert('Você perdeu. Tente novamente outro dia!');
+      return;
+    }
+
     if (this.guessNumber === this.currentNumber.number) {
       if (this.currentNumber.dayContentIndex === 2) {
         alert('Você venceu e ganhou 100 pontos, parabéns!');
@@ -64,16 +78,52 @@ export class MainComponent {
       else {
         alert('Você acertou. Próximo número!');
         this.changeNumber();
+        this.numberRemainingAttempts--;
       }
     }
     else {
-      alert('Você errou. Tente novamente!');
+      if (this.numberRemainingAttempts === 1) {
+        this.disableButtons = true;
+        alert('Você perdeu. Tente novamente outro dia!');
+      }
+      else {
+        alert('Você errou. Tente novamente!');
+      }
+
+      this.numberRemainingAttempts--;
     }
 
     this.guessNumber = null;
   }
 
-  changeNumber() {
+  changeHint(): void {
+    if (this.totalRemainingHints === 0 || this.numberRemainingHints === 0) {
+      alert('Suas dicas acabaram!');
+      return;
+    }
+
+    let dayContentIndex = this.currentNumber.dayContentIndex;
+    let hintIndex = 0;
+
+    if (this.currentNumber.hintIndex === 4) {
+      alert('As dicas desse número acabaram!');
+
+      return;
+    }
+    else {
+      hintIndex = this.currentNumber.hintIndex += 1;
+    }
+
+    this.currentNumber.number = this.dayContent[dayContentIndex].number;
+    this.currentNumber.hint = this.dayContent[dayContentIndex].hints[hintIndex];
+    this.currentNumber.dayContentIndex = dayContentIndex;
+    this.currentNumber.hintIndex = hintIndex;
+
+    this.totalRemainingHints--;
+    this.numberRemainingHints--;
+  }
+
+  private changeNumber() {
     const dayContentIndex = this.currentNumber.dayContentIndex += 1;
     const hintIndex = 0;
 
@@ -84,35 +134,7 @@ export class MainComponent {
       hintIndex: hintIndex
     };
 
+    this.numberRemainingAttempts = 5;
     this.numberRemainingHints = this.totalRemainingHints >= 4 ? 4 : this.totalRemainingHints;
-  }
-
-  changeHint(): void {
-    if (this.totalRemainingHints === 0 || this.numberRemainingHints === 0) {
-      alert('Você perdeu. Tente novamente outro dia!');
-      return;
-    }
-
-    let dayContentIndex = this.currentNumber.dayContentIndex;
-    let hintIndex = 0;
-
-    if (this.currentNumber.hintIndex === 4) {
-      alert('Você perdeu. Tente novamente outro dia!s');
-
-      return;
-    }
-    else {
-      hintIndex = this.currentNumber.hintIndex += 1;
-    }
-
-    this.currentNumber = {
-      number: this.dayContent[dayContentIndex].number,
-      hint: this.dayContent[dayContentIndex].hints[hintIndex],
-      dayContentIndex: dayContentIndex,
-      hintIndex: hintIndex
-    };
-
-    this.totalRemainingHints--;
-    this.numberRemainingHints--;
   }
 }
