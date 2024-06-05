@@ -1,3 +1,4 @@
+import { prisma } from "../index.js";
 import { Test } from "../interfaces/responses.js";
 
 export class UserService {
@@ -5,12 +6,12 @@ export class UserService {
         const test: Test = {
             msg: 'All works fine'
         };
-    
+
         return test;
     }
 
-    test(): void {
-        console.log('a');
+    async test(): Promise<any> {
+        return await prisma.users.findMany()
     }
 }
 
