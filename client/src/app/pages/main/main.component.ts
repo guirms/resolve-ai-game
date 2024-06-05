@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { BaseService } from '../../services/base/base.service';
 import { CurrentNumber, DayContent } from '../../components/data-types/dto';
 import { FormsModule } from '@angular/forms';
+import { MainService } from '../../services/pages/main/main.service';
+import { takeUntil } from 'rxjs';
+import { HttpErrorResponse, provideHttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-main',
@@ -56,7 +59,8 @@ export class MainComponent {
   guessNumber!: number | null;
   disableButtons = false;
 
-  constructor(public baseService: BaseService) { }
+  constructor(public baseService: BaseService,
+    private mainService: MainService) { }
 
   sendGuess(): void {
     if (!this.guessNumber || isNaN(this.guessNumber)) {
@@ -123,7 +127,21 @@ export class MainComponent {
     this.numberRemainingHints--;
   }
 
-  private changeNumber() {
+  test(): void {
+    this.mainService.test()
+      .pipe(takeUntil(this.baseService.ngUnsubscribe))
+      .subscribe({
+        next: (result) => {
+          console.log(result);
+          alert(result.msg);
+        },
+        error: (error: HttpErrorResponse) => {
+          alert(`Erro status: ${error.status}`)
+        }
+      });
+  }
+
+  private changeNumber(): void {
     const dayContentIndex = this.currentNumber.dayContentIndex += 1;
     const hintIndex = 0;
 
