@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import { PrismaClient } from "@prisma/client";
+import userRoute from './routes/user.route.js';
 import { UserService } from './services/user.service.js';
 
 export const prisma = new PrismaClient();
@@ -12,22 +13,15 @@ const corsOptions = {
 
 async function main() {
     app.use(cors(corsOptions));
-
+    app.use(express.json());
+    
     const port = 3000;
-    const userService = new UserService();
 
     app.get('/', (_req, res) => {
-        res.json(userService.login())
+        res.json('OK')
     });
 
-    app.get('/test', async (_req, res) => {
-        try {
-            res.status(200).json(await userService.test());
-        }
-        catch (error) {
-            return res.status(500).json({ message: error.message });
-        }
-    });
+    app.use('/user', userRoute);
 
     app.listen(port, () => {
         return console.log(`Express is listening at http://localhost:${port}`);

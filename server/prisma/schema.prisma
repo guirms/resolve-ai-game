@@ -9,7 +9,7 @@ datasource db {
 
 model users {
   UserId   Int     @id @default(autoincrement())
-  Name     String  @db.VarChar(255)
-  Password String? @db.VarChar(255)
-  Country  Int?
+  Name     String  @db.VarChar(255) @unique
+  Password String @db.VarChar(255)
+  Country  Int
 }
