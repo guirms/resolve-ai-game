@@ -1,4 +1,5 @@
 import { prisma } from "../index.js";
+import { AddPointsRequest } from "../interfaces/requests.js";
 import { DailyChallengeResponse, UserResponse } from "../interfaces/responses.js";
 
 export class DailyChallengeService {
@@ -34,6 +35,17 @@ export class DailyChallengeService {
         }));
 
         return response;
+    }
+
+    async addPoints(addPointsRequest: AddPointsRequest, userId: number): Promise<void> {
+        await prisma.users.update({
+            where: { UserId: userId },
+            data: {
+                TotalPoints: {
+                    increment: addPointsRequest.points
+                }
+            }
+        });
     }
 }
 

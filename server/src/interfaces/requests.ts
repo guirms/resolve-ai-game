@@ -11,3 +11,8 @@ export interface LoginRequest {
    password: string, 
    country: ECountry
 }
+
+export interface AddPointsRequest {
+    points: number;
+}
+
