@@ -22,7 +22,7 @@ router.patch('/addPoints', auth, async (req: any, res) => {
         const addPointsRequestRequest: AddPointsRequest = req.body;        
         const userId = req.user;
 
-        await dailyChallenge.addPoints(addPointsRequestRequest, userId)
+        await dailyChallenge.addPoints(addPointsRequestRequest, userId);
 
         res.status(204).json();
     } catch (error) {

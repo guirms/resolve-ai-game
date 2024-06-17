@@ -2,6 +2,7 @@ import { Router } from "express";
 import { UserService } from "../services/user.service.js";
 import { Test } from "../interfaces/responses.js";
 import { LoginRequest, UserRequest } from "../interfaces/requests.js";
+import { auth } from "../infra/middleware/middleware.js";
 
 const router = Router();
 
@@ -34,6 +35,19 @@ router.post('/login', async (req, res) => {
         res.status(200).json((await userService.login(loginRequest)));
     } catch (error) {
         return res.status(400).json({ message: 'Usuário ou senha inválidos' });
+    }
+});
+
+router.get('/getRanking/:currentPage', auth, async (req, res) => {
+    try {
+        const currentPage = parseInt(req.params.currentPage, 10);
+        if (isNaN(currentPage) || currentPage < 1) {
+            return res.status(400).json({ message: 'Página inválida' });
+        }
+        
+        res.status(200).json(await userService.getRanking(currentPage));
+    } catch (error) {
+        return res.status(400).json({ message: error.message });
     }
 });
 

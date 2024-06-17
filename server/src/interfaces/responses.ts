@@ -18,3 +18,9 @@ export interface DailyChallengeResponse {
 export interface LoginResponse {
     authToken: string;
 }
+
+export interface RankingResponse {
+    name: string, 
+    country: ECountry,
+    totalPoints: number
+}

@@ -1,7 +1,7 @@
 import { prisma } from "../index.js";
 import { LoginRequest, UserRequest } from "../interfaces/requests.js";
 import jwt from 'jsonwebtoken';
-import { LoginResponse, UserResponse } from "../interfaces/responses.js";
+import { LoginResponse, RankingResponse, UserResponse } from "../interfaces/responses.js";
 
 const JWT_SECRET = process.env.JWT_SECRET;
 
@@ -13,7 +13,7 @@ export class UserService {
         });
 
         if (existingUser) {
-            throw new Error('User with this name already exists');
+            throw new Error('Já existe um usuário com esse nome');
         }
 
         const user = await prisma.users.create({
@@ -47,6 +47,36 @@ export class UserService {
         });
 
         return { authToken: this.generateToken(user.UserId) };
+    }
+
+    async getRanking(currentPage: number): Promise<RankingResponse[]> {
+        const pageSize = 20;
+        const skip = (currentPage - 1) * pageSize;
+
+        const ranking = await prisma.users.findMany({
+            skip: skip,
+            take: pageSize,
+            orderBy: {
+                TotalPoints: 'desc'
+            },
+            select: {
+                Name: true,
+                Country: true,
+                TotalPoints: true
+            }
+        });
+
+        if (!ranking || ranking.length === 0) {
+            throw new Error('Página não encontrada');
+        }
+
+        const response: RankingResponse[] = ranking.map(user => ({
+            name: user.Name,
+            country: user.Country,
+            totalPoints: user.TotalPoints
+        }));
+
+        return response;
     }
 
     private generateToken(userId: number): string {
