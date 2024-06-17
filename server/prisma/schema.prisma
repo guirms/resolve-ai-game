@@ -7,9 +7,33 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model daily_challenge {
+  DailyChallengeId Int      @id @default(autoincrement())
+  Number           Int
+  Date             DateTime @db.DateTime(0)
+  hints            hints[]
+  users            users[]
+}
+
+model hints {
+  HintId           Int             @id @default(autoincrement())
+  Name             String          @db.VarChar(255)
+  Difficulty       Int 
+
+  DailyChallengeId Int
+  daily_challenge  daily_challenge @relation(fields: [DailyChallengeId], references: [DailyChallengeId], onDelete: NoAction, onUpdate: NoAction, map: "fk_DailyChallengeId")
+
+  @@index([DailyChallengeId], map: "fk_DailyChallengeId")
+}
+
 model users {
-  UserId   Int     @id @default(autoincrement())
-  Name     String  @db.VarChar(255) @unique
-  Password String @db.VarChar(255)
-  Country  Int
+  UserId               Int              @id @default(autoincrement())
+  Name                 String           @unique(map: "Name") @db.VarChar(255)
+  Password             String           @db.VarChar(255)
+  Country              Int
+  TotalPoints          Int             
+  LastDailyChallengeId Int?
+  daily_challenge      daily_challenge? @relation(fields: [LastDailyChallengeId], references: [DailyChallengeId], onDelete: NoAction, onUpdate: NoAction, map: "fk_LastDailyChallengeId")
+
+  @@index([LastDailyChallengeId], map: "fk_LastDailyChallengeId")
 }

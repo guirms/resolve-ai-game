@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import { PrismaClient } from "@prisma/client";
 import userRoute from './routes/user.route.js';
-import { UserService } from './services/user.service.js';
+import dailyChallengeRoute from './routes/daily-challenge.route.js';
 
 export const prisma = new PrismaClient();
 const app = express();
@@ -22,6 +22,8 @@ async function main() {
     });
 
     app.use('/user', userRoute);
+
+    app.use('/dailyChallenge', dailyChallengeRoute);
 
     app.listen(port, () => {
         return console.log(`Express is listening at http://localhost:${port}`);
