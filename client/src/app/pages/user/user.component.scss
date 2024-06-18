@@ -73,6 +73,14 @@ main {
                 height: 1.5rem;
             }
         }
+
+        &--change-box {
+            cursor: pointer;
+            margin-top: .7rem;
+            color: #0688FF;
+            text-decoration: underline;
+            font-size: 1.4rem; 
+        }
     }
 }
 

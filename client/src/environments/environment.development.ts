@@ -1,4 +1,5 @@
 export const environment = {
+    baseUrl: 'http://localhost:3000/',
     countryList: [
         { name: "Afghanistan", value: 1, isSelected: false },
         { name: "Albania", value: 2, isSelected: false },

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { BaseService } from '../../services/base/base.service';
-import { CurrentNumber, DayContent } from '../../components/data-types/dto';
+import { CurrentNumber, DayContent } from '../../components/data-types/dtos';
 import { FormsModule } from '@angular/forms';
 import { MainService } from '../../services/pages/main/main.service';
 import { takeUntil } from 'rxjs';

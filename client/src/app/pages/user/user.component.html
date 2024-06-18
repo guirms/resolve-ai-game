@@ -1,0 +1,55 @@
+<body>
+    <header>
+        <img class="logo" src="assets/img/resolve-ai-logo.png" alt="Logo resolve aí"
+            (click)="baseService.navigateByUrl(0)">
+
+        <img class="game" src="assets/icon/game.svg" (click)="baseService.navigateByUrl(0)">
+    </header>
+
+    <main>
+        <section class="container">
+            @if (isRegistering) {
+            <p class="blue-text">CRIAR CONTA</p>
+            }
+            @if (!isRegistering) {
+            <p class="blue-text">ACESSAR CONTA</p>
+            }
+
+            <input type="text" class="container__register--input" placeholder="Digite seu nick" maxlength="50"
+                [(ngModel)]="nickName">
+
+            <input type="password" class="container__register--input" placeholder="Digite sua senha" maxlength="50"
+                [(ngModel)]="password">
+
+            @if (isRegistering) {
+            <select class="container__register--input">
+                @for (country of countryList; track country) {
+                <option [value]="country.value" [selected]="country.isSelected">
+                    {{ country.name }}</option>
+                }
+
+            </select>
+            }
+
+            <button class="container__submit-btn" (click)="isRegistering ? saveUser() : login()">
+                <p>{{ buttonText }}</p>
+
+                @if (isLoading) {
+                <img src="assets/img/load.gif">
+                }
+
+                @if (!isLoading) {
+                <img src="assets/icon/check.svg">
+                }
+            </button>
+
+            @if (!isRegistering) {
+                <a class="container--change-box" (click)="changeBox()">Criar conta</a>
+            }
+
+            @if (isRegistering) {
+                <a class="container--change-box" (click)="changeBox()">Acessar conta</a>
+            }
+        </section>
+    </main>
+</body>
