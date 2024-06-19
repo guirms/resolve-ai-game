@@ -8,11 +8,10 @@ import { AuthToken } from '../../../../assets/constants/storage-key';
 })
 export class MainService {
 
-  private headers!: HttpHeaders;
+  private headers = new HttpHeaders();;
 
   constructor(private http: HttpClient) { 
     this.headers = this.headers.append('Authorization', `Bearer ${localStorage.getItem(AuthToken)}`);
-
   }
   
 

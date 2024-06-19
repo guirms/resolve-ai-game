@@ -8,12 +8,7 @@
 
     <main>
         <section class="container">
-            @if (isRegistering) {
-            <p class="blue-text">CRIAR CONTA</p>
-            }
-            @if (!isRegistering) {
-            <p class="blue-text">ACESSAR CONTA</p>
-            }
+            <p class="blue-text">{{ isRegistering ? 'CRIAR CONTA' : 'ACESSAR CONTA' }}</p>
 
             <input type="text" class="container__register--input" placeholder="Digite seu nick" maxlength="50"
                 [(ngModel)]="nickName">
@@ -32,7 +27,7 @@
             }
 
             <button class="container__submit-btn" (click)="isRegistering ? saveUser() : login()">
-                <p>{{ buttonText }}</p>
+                <p>{{ !isRegistering ? 'ENTRAR' : 'CRIAR CONTA' }}</p>
 
                 @if (isLoading) {
                 <img src="assets/img/load.gif">
@@ -43,13 +38,8 @@
                 }
             </button>
 
-            @if (!isRegistering) {
-                <a class="container--change-box" (click)="changeBox()">Criar conta</a>
-            }
-
-            @if (isRegistering) {
-                <a class="container--change-box" (click)="changeBox()">Acessar conta</a>
-            }
+            <a class="container--change-box" (click)="changeBox()">{{ !isRegistering ? 'Criar conta' : 'Acessar conta'
+                }}</a>
         </section>
     </main>
 </body>
