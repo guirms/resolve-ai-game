@@ -4,11 +4,6 @@ export interface CountyInfo {
     isSelected: boolean;
 }
 
-export interface DayContent {
-    number: number;
-    hints: string[]; 
-}
-
 export interface CurrentNumber {
     number: number;
     hint: string; 

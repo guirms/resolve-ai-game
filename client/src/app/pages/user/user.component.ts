@@ -68,7 +68,7 @@ export class UserComponent {
         error: (error: HttpErrorResponse) => {
           this.isLoading = false;
 
-          alert(error.error.message);
+          alert(error.error?.message ?? 'Erro de comunicação com o serviço');
         }
       });
   }
@@ -102,7 +102,7 @@ export class UserComponent {
         error: (error: HttpErrorResponse) => {
           this.isLoading = false;
 
-          alert(error.error.message);
+          alert(error.error?.message ?? 'Erro de comunicação com o serviço');
         }
       });
   }

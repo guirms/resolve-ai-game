@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BaseService } from '../../services/base/base.service';
-import { CurrentNumber, DayContent } from '../../components/data-types/dtos';
+import { CurrentNumber } from '../../components/data-types/dtos';
 import { FormsModule } from '@angular/forms';
 import { MainService } from '../../services/pages/main/main.service';
 import { takeUntil } from 'rxjs';
 import { HttpErrorResponse, provideHttpClient } from '@angular/common/http';
+import { DailyChallengeResponse } from '../../components/data-types/responses';
 
 @Component({
   selector: 'app-main',
@@ -13,54 +14,49 @@ import { HttpErrorResponse, provideHttpClient } from '@angular/common/http';
   templateUrl: './main.component.html',
   styleUrl: './main.component.scss'
 })
-export class MainComponent {
-  dayContent: DayContent[] = [
-    {
-      number: 7,
-      hints: [
-        "É o número da camiseta do jogador Cristiano Ronaldo",
-        "É o número de cores no arco-íris",
-        "É o quarto número primo começando em 0",
-        "É a raíz quadrada de 49",
-        "É o número de dias em uma semana"
-      ]
-    },
-    {
-      number: 15,
-      hints: [
-        "É o menor número triangular que é divisível por 5",
-        "É o número de cartas em um jogo de pôquer",
-        "É um número divisível por 5 e 3",
-        "É o número de itens em uma dúzia e meia",
-        "É o número de dias em metade de um mês"
-      ]
-    },
-    {
-      number: 22,
-      hints: [
-        "É o número de letras no alfabeto hebraico",
-        "É o número de jogadores em um time de futebol americano",
-        "É o dobro do número de jogadores de um time de futebol",
-        "É o resultado da equação x * 2 = 88/2",
-        "É a subtração dos números 3921 e 3899",
-      ]
-    }
-  ];
-  currentNumber: CurrentNumber = {
-    number: this.dayContent[0].number,
-    hint: this.dayContent[0].hints[0],
-    dayContentIndex: 0,
-    hintIndex: 0
-  };
-
+export class MainComponent implements OnInit {
+  dayContent!: DailyChallengeResponse[];
+  currentNumber!: CurrentNumber;
   totalRemainingHints: number = 9;
   numberRemainingHints: number = 4;
   numberRemainingAttempts: number = 5;
   guessNumber!: number | null;
   disableButtons = false;
+  isLoading = false;
 
   constructor(public baseService: BaseService,
     private mainService: MainService) { }
+
+  ngOnInit(): void {
+    this.getChallenge();
+  }
+
+  getChallenge(): void {
+    this.isLoading = true;
+
+    this.mainService.getChallenge()
+      .pipe(takeUntil(this.baseService.ngUnsubscribe))
+      .subscribe({
+        next: (result) => {
+          this.dayContent = result;
+
+          this.currentNumber = {
+            number: this.dayContent[0].number,
+            hint: this.dayContent[0].hints[0],
+            dayContentIndex: 0,
+            hintIndex: 0
+          };
+
+
+          this.isLoading = false;
+        },
+        error: (error: HttpErrorResponse) => {
+          this.isLoading = false;
+
+          alert(error.error?.message ?? 'Erro de comunicação com o serviço');
+        }
+      });
+  }
 
   sendGuess(): void {
     if (!this.guessNumber || isNaN(this.guessNumber)) {
@@ -125,20 +121,6 @@ export class MainComponent {
 
     this.totalRemainingHints--;
     this.numberRemainingHints--;
-  }
-
-  test(): void {
-    this.mainService.test()
-      .pipe(takeUntil(this.baseService.ngUnsubscribe))
-      .subscribe({
-        next: (result) => {
-          console.log(result);
-          alert(result.msg);
-        },
-        error: (error: HttpErrorResponse) => {
-          alert(`Erro status: ${error.status}`)
-        }
-      });
   }
 
   private changeNumber(): void {

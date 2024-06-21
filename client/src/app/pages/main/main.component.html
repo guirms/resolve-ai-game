@@ -1,12 +1,18 @@
 <body>
     <header>
-        <img class="logo" src="assets/img/resolve-ai-logo.png" alt="Logo resolve aí" (click)="baseService.navigateByUrl(0)">
+        <img class="logo" src="assets/img/resolve-ai-logo.png" alt="Logo resolve aí"
+            (click)="baseService.navigateByUrl(0)">
 
         <img class="ranking" src="assets/icon/ranking.svg" (click)="baseService.navigateByUrl(2)">
     </header>
 
     <main>
         <section class="container">
+            @if (isLoading) {
+                <img class="container--main-load" src="assets/img/load.gif">
+            }
+
+            @if (!isLoading) {
             <div class="container__hint">
                 <div class="container__hint__title">
                     <img src="assets/icon/hint.svg">
@@ -16,9 +22,9 @@
 
                 <u>{{ currentNumber.hint }}</u>
 
-                <button class="container__new-hint-btn" (click)="test()" [disabled]="disableButtons">
-                    <p>NOVA DICA</p>   
-                    
+                <button class="container__new-hint-btn" (click)="changeHint()" [disabled]="disableButtons">
+                    <p>NOVA DICA</p>
+
                     <img src="assets/icon/refresh.svg">
                 </button>
             </div>
@@ -45,10 +51,11 @@
             </div>
 
             <button class="container__send-guess-btn" (click)="sendGuess()" [disabled]="disableButtons">
-                <p>ENVIAR PALPITE</p>   
-                
+                <p>ENVIAR PALPITE</p>
+
                 <img src="assets/icon/check.svg">
             </button>
+            }
         </section>
     </main>
 </body>

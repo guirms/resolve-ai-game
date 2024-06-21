@@ -7,7 +7,6 @@ import { ERoutePath } from '../../data-types/enums';
 export const authGuard: CanActivateFn = () => {
   const authService = inject(AuthService);
   const baseService = inject(BaseService);
-  const router = inject(Router);
 
   if (authService.isAuthenticated()) {
     return true;

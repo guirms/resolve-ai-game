@@ -20,9 +20,12 @@ export class AuthService {
 
   isAuthenticated(): boolean {
     const token = this.getToken();
+
     if (!token) {
+      localStorage.clear();
       return false;
     }
+
     return !this.isTokenExpired(token);
   }
 }
