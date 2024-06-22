@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { auth } from "../infra/middleware/middleware.js";
 import { DailyChallengeService } from "../services/daily-challenge.service.js";
-import { AddPointsRequest } from "../interfaces/requests.js";
+import { ProgressRequest } from "../interfaces/requests.js";
 
 const router = Router();
 
@@ -17,12 +17,12 @@ router.get('/get', auth, async (req: any, res) => {
     }
 });
 
-router.patch('/addPoints', auth, async (req: any, res) => {
+router.patch('/saveProgress', auth, async (req: any, res) => {
     try {
-        const addPointsRequestRequest: AddPointsRequest = req.body;        
+        const progressRequest: ProgressRequest = req.body;        
         const userId = req.user;
 
-        await dailyChallenge.addPoints(addPointsRequestRequest, userId);
+        await dailyChallenge.saveProgress(progressRequest, userId);
 
         res.status(204).json();
     } catch (error) {

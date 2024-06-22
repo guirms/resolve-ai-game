@@ -11,6 +11,7 @@ export interface UserResponse {
 }
 
 export interface DailyChallengeResponse {
+    dailyChallengeId: number;
     number: number, 
     hints: string[], 
 }
@@ -21,6 +22,6 @@ export interface LoginResponse {
 
 export interface RankingResponse {
     name: string, 
-    country: ECountry,
+    country: string,
     totalPoints: number
 }

@@ -2,6 +2,7 @@ import { prisma } from "../index.js";
 import { LoginRequest, UserRequest } from "../interfaces/requests.js";
 import jwt from 'jsonwebtoken';
 import { LoginResponse, RankingResponse, UserResponse } from "../interfaces/responses.js";
+import { ECountry } from "../interfaces/enums.js";
 
 const JWT_SECRET = process.env.JWT_SECRET;
 
@@ -72,7 +73,7 @@ export class UserService {
 
         const response: RankingResponse[] = ranking.map(user => ({
             name: user.Name,
-            country: user.Country,
+            country: ECountry[user.Country],
             totalPoints: user.TotalPoints
         }));
 

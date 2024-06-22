@@ -12,7 +12,8 @@ export interface LoginRequest {
    country: ECountry
 }
 
-export interface AddPointsRequest {
-    points: number;
+export interface ProgressRequest {
+    lastDailyChallengeId: number;
+    pointsToAdd: number;
 }
 

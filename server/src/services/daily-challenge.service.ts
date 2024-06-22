@@ -1,5 +1,5 @@
 import { prisma } from "../index.js";
-import { AddPointsRequest } from "../interfaces/requests.js";
+import {ProgressRequest } from "../interfaces/requests.js";
 import { DailyChallengeResponse, UserResponse } from "../interfaces/responses.js";
 
 export class DailyChallengeService {
@@ -30,6 +30,7 @@ export class DailyChallengeService {
         }
 
         const response: DailyChallengeResponse[] = dailyChallenge.map(challenge => ({
+            dailyChallengeId: challenge.DailyChallengeId,
             number: challenge.Number,
             hints: challenge.hints.map(hint => hint.Name)
         }));
@@ -37,13 +38,14 @@ export class DailyChallengeService {
         return response;
     }
 
-    async addPoints(addPointsRequest: AddPointsRequest, userId: number): Promise<void> {
+    async saveProgress(progressRequest: ProgressRequest, userId: number): Promise<void> {
         await prisma.users.update({
             where: { UserId: userId },
             data: {
                 TotalPoints: {
-                    increment: addPointsRequest.points
-                }
+                    increment: progressRequest.pointsToAdd
+                },
+                LastDailyChallengeId: progressRequest.lastDailyChallengeId
             }
         });
     }    
