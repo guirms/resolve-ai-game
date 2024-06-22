@@ -15,7 +15,7 @@ import { DailyChallengeResponse } from '../../components/data-types/responses';
   styleUrl: './main.component.scss'
 })
 export class MainComponent implements OnInit {
-  dayContent!: DailyChallengeResponse[];
+  dailyChallengeResponse!: DailyChallengeResponse[];
   currentNumber!: CurrentNumber;
   totalRemainingHints: number = 9;
   numberRemainingHints: number = 4;
@@ -38,11 +38,11 @@ export class MainComponent implements OnInit {
       .pipe(takeUntil(this.baseService.ngUnsubscribe))
       .subscribe({
         next: (result) => {
-          this.dayContent = result;
+          this.dailyChallengeResponse = result;
 
           this.currentNumber = {
-            number: this.dayContent[0].number,
-            hint: this.dayContent[0].hints[0],
+            number: this.dailyChallengeResponse[0].number,
+            hint: this.dailyChallengeResponse[0].hints[0],
             dayContentIndex: 0,
             hintIndex: 0
           };
@@ -114,8 +114,8 @@ export class MainComponent implements OnInit {
       hintIndex = this.currentNumber.hintIndex += 1;
     }
 
-    this.currentNumber.number = this.dayContent[dayContentIndex].number;
-    this.currentNumber.hint = this.dayContent[dayContentIndex].hints[hintIndex];
+    this.currentNumber.number = this.dailyChallengeResponse[dayContentIndex].number;
+    this.currentNumber.hint = this.dailyChallengeResponse[dayContentIndex].hints[hintIndex];
     this.currentNumber.dayContentIndex = dayContentIndex;
     this.currentNumber.hintIndex = hintIndex;
 
@@ -128,8 +128,8 @@ export class MainComponent implements OnInit {
     const hintIndex = 0;
 
     this.currentNumber = {
-      number: this.dayContent[dayContentIndex].number,
-      hint: this.dayContent[dayContentIndex].hints[hintIndex],
+      number: this.dailyChallengeResponse[dayContentIndex].number,
+      hint: this.dailyChallengeResponse[dayContentIndex].hints[hintIndex],
       dayContentIndex: dayContentIndex,
       hintIndex: hintIndex
     };

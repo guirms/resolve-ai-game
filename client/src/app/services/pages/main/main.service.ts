@@ -10,7 +10,7 @@ import { environment } from '../../../../environments/environment.development';
 })
 export class MainService {
 
-  private headers = new HttpHeaders();;
+  private headers = new HttpHeaders();
 
   constructor(private http: HttpClient) { 
     this.headers = this.headers.append('Authorization', `Bearer ${localStorage.getItem(AuthToken)}`);

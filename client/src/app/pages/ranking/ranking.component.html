@@ -15,32 +15,20 @@
           <th>País</th>
           <th>Pontos</th>
         </tr>
+        @for (ranking of rankingResponse; track ranking) {
         <tr>
-          <td>João</td>
-          <td>Brasil</td>
-          <td>100</td>
+          <td>{{ ranking.name }}</td>
+          <td>{{ ranking.country }}</td>
+          <td>{{ ranking.totalPoints }}</td>
         </tr>
-        <tr>
-          <td>Maria</td>
-          <td>Portugal</td>
-          <td>85</td>
-        </tr>
-        <tr>
-          <td>Carlos</td>
-          <td>Espanha</td>
-          <td>75</td>
-        </tr>
-        <tr>
-          <td>Ana</td>
-          <td>Itália</td>
-          <td>90</td>
-        </tr>
-        <tr>
-          <td>Luis</td>
-          <td>França</td>
-          <td>80</td>
-        </tr>
+        }
       </table>
+
+      <footer>
+        <p class="arrow-left" (click)="changePage(-1)"><<</p>
+        <p>Alterar página ({{ currentPage }})</p>
+        <p class="arrow-right" (click)="changePage(1)">>></p>
+      </footer>
     </section>
   </main>
 </body>

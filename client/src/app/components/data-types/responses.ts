@@ -7,6 +7,14 @@ export interface SaveUserResponse {
 }
 
 export interface DailyChallengeResponse {
+    dailyChallengeId: number;
     number: number, 
     hints: string[], 
+}
+
+
+export interface RankingResponse {
+    name: string, 
+    country: string,
+    totalPoints: number
 }
