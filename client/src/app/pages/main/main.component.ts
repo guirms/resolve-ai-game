@@ -17,9 +17,9 @@ import { DailyChallengeResponse } from '../../components/data-types/responses';
 export class MainComponent implements OnInit {
   dailyChallengeResponse!: DailyChallengeResponse[];
   currentNumber!: CurrentNumber;
-  totalremainingHintsPerNumber: number = 9;
-  numberremainingHintsPerNumber: number = 4;
   remainingAttemptsPerNumber: number = 5;
+  remainingHintsPerNumber: number = 4;
+  totalRemainingHints: number = 9;
   guessNumber!: number | null;
   disableButtons = false;
   isLoading = false;
@@ -97,7 +97,7 @@ export class MainComponent implements OnInit {
   }
 
   changeHint(): void {
-    if (this.totalremainingHintsPerNumber === 0 || this.numberremainingHintsPerNumber === 0) {
+    if (this.totalRemainingHints === 0 || this.remainingHintsPerNumber === 0) {
       alert('Suas dicas acabaram!');
       return;
     }
@@ -119,8 +119,8 @@ export class MainComponent implements OnInit {
     this.currentNumber.dayContentIndex = dayContentIndex;
     this.currentNumber.hintIndex = hintIndex;
 
-    this.totalremainingHintsPerNumber--;
-    this.numberremainingHintsPerNumber--;
+    this.remainingHintsPerNumber--;
+    this.totalRemainingHints--;
   }
 
   private changeNumber(): void {
@@ -135,6 +135,6 @@ export class MainComponent implements OnInit {
     };
 
     this.remainingAttemptsPerNumber = 5;
-    this.numberremainingHintsPerNumber = this.totalremainingHintsPerNumber >= 4 ? 4 : this.totalremainingHintsPerNumber;
+    this.remainingHintsPerNumber = this.totalRemainingHints >= 4 ? 4 : this.remainingHintsPerNumber;
   }
 }
