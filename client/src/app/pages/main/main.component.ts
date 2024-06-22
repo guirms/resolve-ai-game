@@ -17,9 +17,9 @@ import { DailyChallengeResponse } from '../../components/data-types/responses';
 export class MainComponent implements OnInit {
   dailyChallengeResponse!: DailyChallengeResponse[];
   currentNumber!: CurrentNumber;
-  totalRemainingHints: number = 9;
-  numberRemainingHints: number = 4;
-  numberRemainingAttempts: number = 5;
+  totalremainingHintsPerNumber: number = 9;
+  numberremainingHintsPerNumber: number = 4;
+  remainingAttemptsPerNumber: number = 5;
   guessNumber!: number | null;
   disableButtons = false;
   isLoading = false;
@@ -64,7 +64,7 @@ export class MainComponent implements OnInit {
       return;
     }
 
-    if (this.numberRemainingAttempts === 0) {
+    if (this.remainingAttemptsPerNumber === 0) {
       this.guessNumber = null;
       this.disableButtons = true;
       alert('Você perdeu. Tente novamente outro dia!');
@@ -78,11 +78,11 @@ export class MainComponent implements OnInit {
       else {
         alert('Você acertou. Próximo número!');
         this.changeNumber();
-        this.numberRemainingAttempts--;
+        this.remainingAttemptsPerNumber--;
       }
     }
     else {
-      if (this.numberRemainingAttempts === 1) {
+      if (this.remainingAttemptsPerNumber === 1) {
         this.disableButtons = true;
         alert('Você perdeu. Tente novamente outro dia!');
       }
@@ -90,14 +90,14 @@ export class MainComponent implements OnInit {
         alert('Você errou. Tente novamente!');
       }
 
-      this.numberRemainingAttempts--;
+      this.remainingAttemptsPerNumber--;
     }
 
     this.guessNumber = null;
   }
 
   changeHint(): void {
-    if (this.totalRemainingHints === 0 || this.numberRemainingHints === 0) {
+    if (this.totalremainingHintsPerNumber === 0 || this.numberremainingHintsPerNumber === 0) {
       alert('Suas dicas acabaram!');
       return;
     }
@@ -119,8 +119,8 @@ export class MainComponent implements OnInit {
     this.currentNumber.dayContentIndex = dayContentIndex;
     this.currentNumber.hintIndex = hintIndex;
 
-    this.totalRemainingHints--;
-    this.numberRemainingHints--;
+    this.totalremainingHintsPerNumber--;
+    this.numberremainingHintsPerNumber--;
   }
 
   private changeNumber(): void {
@@ -134,7 +134,7 @@ export class MainComponent implements OnInit {
       hintIndex: hintIndex
     };
 
-    this.numberRemainingAttempts = 5;
-    this.numberRemainingHints = this.totalRemainingHints >= 4 ? 4 : this.totalRemainingHints;
+    this.remainingAttemptsPerNumber = 5;
+    this.numberremainingHintsPerNumber = this.totalremainingHintsPerNumber >= 4 ? 4 : this.totalremainingHintsPerNumber;
   }
 }

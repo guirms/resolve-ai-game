@@ -35,17 +35,17 @@
                 <input type="number" class="container__guess--input" [(ngModel)]="guessNumber">
 
                 <div class="container__guess__attempts">
-                    <p class="container__guess__attempts--number">{{ numberRemainingAttempts }}</p>
+                    <p class="container__guess__attempts--number">{{ remainingAttemptsPerNumber }}</p>
                     <p>Tentativa(s)</p>
                 </div>
 
                 <div class="container__guess__total-remaining-hints">
-                    <p class="container__guess__total-remaining-hints--number">{{ totalRemainingHints }}</p>
+                    <p class="container__guess__total-remaining-hints--number">{{ totalremainingHintsPerNumber }}</p>
                     <p>Dica(s) totais restantes</p>
                 </div>
 
                 <div class="container__guess__number-remaining-hints">
-                    <p class="container__guess__number-remaining-hints--number">{{ numberRemainingHints }}</p>
+                    <p class="container__guess__number-remaining-hints--number">{{ numberremainingHintsPerNumber }}</p>
                     <p>Dica(s) por número restantes</p>
                 </div>
             </div>
