@@ -8,3 +8,11 @@ export interface SaveUserRequest {
     password: string, 
     country: number
 }
+
+export interface ProgressRequest {
+    pointsToAdd: number;
+    remainingAttemptsPerNumber: number;
+    remainingHintsPerNumber: number;
+    totalRemainingHints: number;
+    lastDailyChallengeId: number;
+}

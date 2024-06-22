@@ -5,6 +5,7 @@ export interface CountyInfo {
 }
 
 export interface CurrentNumber {
+    dailyChallengeId: number;
     number: number;
     hint: string; 
     dayContentIndex: number;

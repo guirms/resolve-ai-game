@@ -2,8 +2,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AuthToken } from '../../../../assets/constants/storage-key';
-import { DailyChallengeResponse } from '../../../components/data-types/responses';
+import { UserChallengeResponse } from '../../../components/data-types/responses';
 import { environment } from '../../../../environments/environment.development';
+import { ProgressRequest } from '../../../components/data-types/requests';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,11 @@ export class MainService {
     this.headers = this.headers.append('Authorization', `Bearer ${localStorage.getItem(AuthToken)}`);
   }
   
-  getChallenge(): Observable<DailyChallengeResponse[]> {
-    return this.http.get<DailyChallengeResponse[]>(environment.baseUrl + 'dailyChallenge/get', { headers: this.headers });
+  getChallenge(): Observable<UserChallengeResponse> {
+    return this.http.get<UserChallengeResponse>(environment.baseUrl + 'dailyChallenge/get', { headers: this.headers });
+  }
+
+  saveProgress(progressRequest: ProgressRequest): Observable<void> {
+    return this.http.patch<void>(environment.baseUrl + 'dailyChallenge/saveProgress', progressRequest, { headers: this.headers });
   }
 }
