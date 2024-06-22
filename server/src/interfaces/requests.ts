@@ -1,19 +1,22 @@
 import { ECountry } from "./enums.js";
 
-export interface UserRequest { 
-    name: string, 
-    password: string, 
+export interface UserRequest {
+    name: string,
+    password: string,
     country: ECountry
 }
 
-export interface LoginRequest { 
-   name: string, 
-   password: string, 
-   country: ECountry
+export interface LoginRequest {
+    name: string,
+    password: string,
+    country: ECountry
 }
 
 export interface ProgressRequest {
-    lastDailyChallengeId: number;
     pointsToAdd: number;
+    remainingAttemptsPerNumber: number;
+    remainingHintsPerNumber: number;
+    totalRemainingHints: number;
+    lastDailyChallengeId: number;
 }
 

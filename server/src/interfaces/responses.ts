@@ -10,7 +10,14 @@ export interface UserResponse {
     country: ECountry
 }
 
-export interface DailyChallengeResponse {
+export interface UserChallengeResponse {
+    remainingAttemptsPerNumber: number;
+    remainingHintsPerNumber: number;
+    totalRemainingHints: number;
+    dailyChallenges: DailyChallengeDto[];
+}
+
+export interface DailyChallengeDto {
     dailyChallengeId: number;
     number: number, 
     hints: string[], 
