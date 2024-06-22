@@ -24,7 +24,10 @@ CREATE TABLE `users` (
     `Name` VARCHAR(255) NOT NULL,
     `Password` VARCHAR(255) NOT NULL,
     `Country` INTEGER NOT NULL,
-    `TotalPoints` INTEGER NULL DEFAULT 0,
+    `TotalPoints` INTEGER NOT NULL,
+    `RemainingAttemptsPerNumber` INTEGER NOT NULL DEFAULT 5,
+    `RemainingHintsPerNumber` INTEGER NOT NULL DEFAULT 4,
+    `TotalRemainingHints` INTEGER NOT NULL DEFAULT 9,
     `LastDailyChallengeId` INTEGER NULL,
 
     UNIQUE INDEX `Name`(`Name`),

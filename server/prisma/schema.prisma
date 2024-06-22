@@ -31,7 +31,10 @@ model users {
   Name                 String           @unique(map: "Name") @db.VarChar(255)
   Password             String           @db.VarChar(255)
   Country              Int
-  TotalPoints          Int             
+  TotalPoints          Int
+  RemainingAttemptsPerNumber    Int              @default(5)
+  RemainingHintsPerNumber    Int              @default(4)    
+  TotalRemainingHints        Int              @default(9)
   LastDailyChallengeId Int?
   daily_challenge      daily_challenge? @relation(fields: [LastDailyChallengeId], references: [DailyChallengeId], onDelete: NoAction, onUpdate: NoAction, map: "fk_LastDailyChallengeId")
 
