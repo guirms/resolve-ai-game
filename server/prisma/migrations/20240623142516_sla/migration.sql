@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE `users` ADD COLUMN `HastFinished` BOOLEAN NOT NULL DEFAULT false,
+    ALTER COLUMN `LastHintId` DROP DEFAULT;

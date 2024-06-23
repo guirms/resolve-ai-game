@@ -20,7 +20,12 @@ export interface UserChallengeResponse {
 export interface DailyChallengeDto {
     dailyChallengeId: number;
     number: number, 
-    hints: string[], 
+    hints: HintDto[], 
+}
+
+export interface HintDto {
+    hintId: number;
+    name: string;
 }
 
 export interface LoginResponse {

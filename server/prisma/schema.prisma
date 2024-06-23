@@ -12,31 +12,34 @@ model daily_challenge {
   Number           Int
   Date             DateTime @db.DateTime(0)
   hints            hints[]
-  users            users[]
+  users            users[]  @relation("UserDailyChallenges")
 }
 
 model hints {
-  HintId           Int             @id @default(autoincrement())
-  Name             String          @db.VarChar(255)
-  Difficulty       Int 
+  HintId     Int    @id @default(autoincrement())
+  Name       String @db.VarChar(255)
+  Difficulty Int
 
   DailyChallengeId Int
   daily_challenge  daily_challenge @relation(fields: [DailyChallengeId], references: [DailyChallengeId], onDelete: NoAction, onUpdate: NoAction, map: "fk_DailyChallengeId")
+  users            users[]
 
   @@index([DailyChallengeId], map: "fk_DailyChallengeId")
 }
 
 model users {
-  UserId               Int              @id @default(autoincrement())
-  Name                 String           @unique(map: "Name") @db.VarChar(255)
-  Password             String           @db.VarChar(255)
-  Country              Int
-  TotalPoints          Int
-  RemainingAttemptsPerNumber    Int              @default(5)
-  RemainingHintsPerNumber    Int              @default(4)    
-  TotalRemainingHints        Int              @default(9)
-  LastDailyChallengeId Int?
-  daily_challenge      daily_challenge? @relation(fields: [LastDailyChallengeId], references: [DailyChallengeId], onDelete: NoAction, onUpdate: NoAction, map: "fk_LastDailyChallengeId")
+  UserId                     Int               @id @default(autoincrement())
+  Name                       String            @unique(map: "Name") @db.VarChar(255)
+  Password                   String            @db.VarChar(255)
+  Country                    Int
+  TotalPoints                Int
+  RemainingAttemptsPerNumber Int               @default(5)
+  RemainingHintsPerNumber    Int               @default(4)
+  TotalRemainingHints        Int               @default(9)
+  LastHintId                 Int?             
+  HastFinished               Boolean           @default(false)
+  hints                      hints?            @relation(fields: [LastHintId], references: [HintId], onDelete: NoAction, onUpdate: NoAction, map: "fk_LastHintId")
+  daily_challenges           daily_challenge[] @relation("UserDailyChallenges")
 
-  @@index([LastDailyChallengeId], map: "fk_LastDailyChallengeId")
+  @@index([LastHintId], map: "fk_LastHintId")
 }

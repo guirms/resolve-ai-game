@@ -1,5 +1,7 @@
 https://dev.to/vitorrios1001/utilizando-o-prisma-com-typescript-e-sqlite-um-guia-pratico-3nn1
 
+alterar migration
+
 npx prisma migrate dev --name init
 
 npx prisma generate
