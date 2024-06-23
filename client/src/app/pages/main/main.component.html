@@ -7,9 +7,10 @@
     </header>
 
     <main>
+        @if (!hasFinishedChallenge) {
         <section class="container">
             @if (isLoading) {
-                <img class="container--main-load" src="assets/img/load.gif">
+            <img class="container--main-load" src="assets/img/load.gif">
             }
 
             @if (!isLoading) {
@@ -20,7 +21,7 @@
                     <p class="blue-text">DICA:</p>
                 </div>
 
-                <u>{{ currentNumber.hint }}</u>
+                <u>{{ currentNumber.hintName }}</u>
 
                 <button class="container__new-hint-btn" (click)="changeHint()" [disabled]="disableButtons">
                     <p>NOVA DICA</p>
@@ -57,5 +58,10 @@
             </button>
             }
         </section>
+        }
+
+        @if (hasFinishedChallenge) {
+            <p class="finish-message">Você já realizou o desafio hoje. Tente novamente amanhã!</p>
+        }
     </main>
 </body>

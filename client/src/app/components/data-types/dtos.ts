@@ -7,7 +7,8 @@ export interface CountyInfo {
 export interface CurrentNumber {
     dailyChallengeId: number;
     number: number;
-    hint: string; 
+    hintName: string; 
+    hintId: number;
     dayContentIndex: number;
     hintIndex: number;
 }

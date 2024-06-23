@@ -14,5 +14,6 @@ export interface ProgressRequest {
     remainingAttemptsPerNumber: number;
     remainingHintsPerNumber: number;
     totalRemainingHints: number;
-    lastDailyChallengeId: number;
+    lastHintId: number;
+    hasFinished: boolean;
 }

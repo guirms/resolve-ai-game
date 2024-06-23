@@ -3,7 +3,7 @@ p {
 }
 
 header {
-    background-color: rgb(168, 198, 253);    
+    background-color: rgb(168, 198, 253);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -26,9 +26,15 @@ main {
     align-items: center;
     width: 100vw;
 
+    .finish-message {
+        font-size: 2rem;
+        margin-top: 3rem;
+        color: #00f7ff;
+    }
+
     .container {
         display: flex;
-        flex-direction: column;    
+        flex-direction: column;
         align-items: center;
         justify-content: center;
         flex: 0 0 40%;
@@ -72,7 +78,7 @@ main {
             &--title {
                 margin-top: 3rem;
             }
-    
+
             &--input {
                 height: 3.5rem;
                 width: 10rem;
@@ -88,8 +94,8 @@ main {
                 display: flex;
                 justify-content: center;
                 font-size: 1.4rem;
-                gap: 10px;   
-                margin-top: .5rem;                 
+                gap: 10px;
+                margin-top: .5rem;
 
                 &--number {
                     color: #1a9e00;
@@ -100,8 +106,8 @@ main {
                 display: flex;
                 justify-content: center;
                 font-size: 1.4rem;
-                gap: 10px;   
-                margin-top: .5rem;                 
+                gap: 10px;
+                margin-top: .5rem;
 
                 &--number {
                     color: #D36804;
@@ -112,8 +118,8 @@ main {
                 display: flex;
                 justify-content: center;
                 font-size: 1.4rem;
-                gap: 10px;            
-                margin-top: .5rem;    
+                gap: 10px;
+                margin-top: .5rem;
 
                 &--number {
                     color: #00f7ff;
@@ -169,7 +175,7 @@ main {
 
 .blue-text {
     color: #0688FF;
-    font-size: 3rem; 
+    font-size: 3rem;
 }
 
 
