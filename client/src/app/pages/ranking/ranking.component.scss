@@ -18,6 +18,12 @@ header {
         cursor: pointer;
         height: 4rem;
     }
+
+    .logout {
+        cursor: pointer;
+        margin-left: 2rem;
+        height: 3rem;
+    }
 }
 
 main {
@@ -107,12 +113,19 @@ footer {
     }
 
     header {
+        padding: 0;
+
         .logo {
             height: 3rem;
         }
 
         .game {
             height: 3rem;
+        }
+
+        .logout {
+            height: 2rem;
+            margin-left: .5rem;
         }
     }
 

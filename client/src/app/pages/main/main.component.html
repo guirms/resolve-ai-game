@@ -3,7 +3,11 @@
         <img class="logo" src="assets/img/resolve-ai-logo.png" alt="Logo resolve aí"
             (click)="baseService.navigateByUrl(0)">
 
-        <img class="ranking" src="assets/icon/ranking.svg" (click)="baseService.navigateByUrl(2)">
+        <div>
+            <img class="ranking" src="assets/icon/ranking.svg" (click)="baseService.navigateByUrl(2)">
+
+            <img class="logout" src="assets/icon/logout.svg" (click)="baseService.logout()">
+        </div>
     </header>
 
     <main>
@@ -61,7 +65,7 @@
         }
 
         @if (hasFinishedChallenge) {
-            <p class="finish-message">Você já realizou o desafio hoje. Tente novamente amanhã!</p>
+        <p class="finish-message">Você já realizou o desafio hoje. Tente novamente amanhã!</p>
         }
     </main>
 </body>

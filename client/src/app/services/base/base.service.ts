@@ -15,4 +15,9 @@ export class BaseService {
   navigateByUrl(routePath: ERoutePath): void {
     this.router.navigate([ERoutePath[routePath]]);
   }
+
+  logout(): void {
+    localStorage.clear();
+    this.navigateByUrl(ERoutePath.login);
+  }
 }

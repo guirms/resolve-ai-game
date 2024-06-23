@@ -2,7 +2,11 @@
   <header>
     <img class="logo" src="assets/img/resolve-ai-logo.png" alt="Logo resolve aí" (click)="baseService.navigateByUrl(0)">
 
-    <img class="game" src="assets/icon/game.svg" (click)="baseService.navigateByUrl(0)">
+    <div>
+      <img class="game" src="assets/icon/game.svg" (click)="baseService.navigateByUrl(0)">
+
+      <img class="logout" src="assets/icon/logout.svg" (click)="baseService.logout()">
+  </div>
   </header>
 
   <main>
