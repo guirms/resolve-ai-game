@@ -25,7 +25,7 @@
                     <p class="blue-text">DICA:</p>
                 </div>
 
-                <u>{{ currentNumber.hintName }}</u>
+                <!-- <u>{{ currentNumber.hintName }}</u> -->
 
                 <button class="container__new-hint-btn" (click)="changeHint()" [disabled]="disableButtons">
                     <p>NOVA DICA</p>
@@ -60,6 +60,13 @@
 
                 <img src="assets/icon/check.svg">
             </button>
+            }
+
+            @if (!isLoading) {
+                <div class="container__change-day">
+                    <p class="container__change-day--text">Data atual: {{ currentDate }}</p>
+                    <button class="container__change-day--button" (click)="changeDay()">Trocar dia</button>
+                </div>
             }
         </section>
         }

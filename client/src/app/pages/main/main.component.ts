@@ -25,6 +25,7 @@ export class MainComponent implements OnInit {
   disableButtons = false;
   isLoading = false;
   hasFinishedChallenge = false;
+  currentDate = new Date().toISOString().split('T')[0];
 
   constructor(public baseService: BaseService,
     private mainService: MainService) { }
@@ -108,6 +109,10 @@ export class MainComponent implements OnInit {
     this.totalRemainingHints--;
 
     this.saveProgress(false);
+  }
+
+  changeDay(): void {
+    
   }
 
   private getChallenge(): void {
