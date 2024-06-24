@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AuthToken } from '../../../../assets/constants/storage-key';
@@ -17,8 +17,8 @@ export class MainService {
     this.headers = this.headers.append('Authorization', `Bearer ${localStorage.getItem(AuthToken)}`);
   }
   
-  getChallenge(): Observable<UserChallengeResponse> {
-    return this.http.get<UserChallengeResponse>(environment.baseUrl + 'dailyChallenge/get', { headers: this.headers });
+  getChallenge(getNextDay: boolean): Observable<UserChallengeResponse> {
+    return this.http.get<UserChallengeResponse>(environment.baseUrl + `dailyChallenge/get/${getNextDay}`, { headers: this.headers });
   }
 
   saveProgress(progressRequest: ProgressRequest): Observable<void> {

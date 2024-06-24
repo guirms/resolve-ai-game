@@ -25,10 +25,13 @@ export class MainComponent implements OnInit {
   disableButtons = false;
   isLoading = false;
   hasFinishedChallenge = false;
-  currentDate = new Date().toISOString().split('T')[0];
+  currentDate!: string;
+  shouldSaveProgress = true;
 
   constructor(public baseService: BaseService,
-    private mainService: MainService) { }
+    private mainService: MainService) {
+      this.currentDate = this.getLocalStringDate();
+     }
 
   ngOnInit(): void {
     this.getChallenge();
@@ -44,6 +47,7 @@ export class MainComponent implements OnInit {
       this.guessNumber = null;
       this.disableButtons = true;
       alert('Você perdeu. Tente novamente outro dia!');
+      this.hasFinishedChallenge = true;
       this.saveProgress(true);
       return;
     }
@@ -52,10 +56,11 @@ export class MainComponent implements OnInit {
     let hasFinished = false;
 
     if (this.guessNumber === this.currentNumber.number) {
-      if (this.currentNumber.dayContentIndex === 2) {
-        alert('Você venceu e ganhou 100 pontos, parabéns!');
+      if (this.currentNumber.dailyChallengeId === this.userChallengeResponse.dailyChallenges[this.userChallengeResponse.dailyChallenges.length - 1].dailyChallengeId) {
+        alert('Parabéns, você venceu! Volte amanhã para o próximo desafio.');
         totalPoints += 10 - 4 + this.remainingHintsPerNumber - 5 + this.remainingAttemptsPerNumber;
         hasFinished = true;
+        this.hasFinishedChallenge = true;
       }
       else {
         alert('Você acertou. Próximo número!');
@@ -68,6 +73,7 @@ export class MainComponent implements OnInit {
         this.disableButtons = true;
         alert('Você perdeu. Tente novamente outro dia!');
         hasFinished = true;
+        this.hasFinishedChallenge = true;
       }
       else {
         alert('Você errou. Tente novamente!');
@@ -112,13 +118,38 @@ export class MainComponent implements OnInit {
   }
 
   changeDay(): void {
-    
+    this.hasFinishedChallenge = false;
+    this.remainingAttemptsPerNumber = 5;
+    this.remainingHintsPerNumber = 4;
+    this.totalRemainingHints = 9;
+
+    this.saveProgress(false);
+
+    const currentDate = this.getLocalStringDate();
+
+    if (currentDate === this.currentDate) {      
+      const day = parseInt(currentDate.split('-')[2]) + 1;
+      this.currentDate = `${currentDate.split('-')[0]}-${currentDate.split('-')[1]}-${day}`;
+      this.shouldSaveProgress = false;
+    }
+    else {
+      this.currentDate = currentDate;
+      this.shouldSaveProgress = true;
+    }
+
+    this.getChallenge(true);
   }
 
-  private getChallenge(): void {
+  private getLocalStringDate(): string {
+    const dateSplitted = new Date().toLocaleDateString().split('/');
+
+    return `${dateSplitted[2]}-${dateSplitted[1]}-${dateSplitted[0]}`
+  }
+
+  private getChallenge(getNextDay: boolean = false): void {
     this.isLoading = true;
 
-    this.mainService.getChallenge()
+    this.mainService.getChallenge(getNextDay)
       .pipe(takeUntil(this.baseService.ngUnsubscribe))
       .subscribe({
         next: (result) => {
@@ -144,7 +175,7 @@ export class MainComponent implements OnInit {
         error: (error: HttpErrorResponse) => {
           this.isLoading = false;
 
-          if (error.error?.message === 'Você já realizou o desafio hoje. Tente novamente amanhã') {
+          if (error.error?.message === 'Você já realizou o desafio hoje. Tente novamente amanhã!') {
             this.hasFinishedChallenge = true;
             return;
           }
@@ -155,6 +186,10 @@ export class MainComponent implements OnInit {
   }
 
   private saveProgress(hasFinished: boolean, totalPoints: number = 0): void {
+    if (!this.shouldSaveProgress) {
+      return;
+    }
+
     const progressRequest: ProgressRequest = {
       pointsToAdd: totalPoints,
       remainingAttemptsPerNumber: this.remainingAttemptsPerNumber,

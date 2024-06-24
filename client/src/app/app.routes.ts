@@ -9,7 +9,7 @@ export const routes: Routes = [
     {
       path: '',
       pathMatch: 'full',
-      component: MainComponent      
+      component: UserComponent      
     },
     {
       path: ERoutePath[0],
