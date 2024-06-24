@@ -41,6 +41,7 @@ router.post('/login', async (req, res) => {
 router.get('/getRanking/:currentPage', auth, async (req, res) => {
     try {
         const currentPage = parseInt(req.params.currentPage, 10);
+        
         if (isNaN(currentPage) || currentPage < 1) {
             return res.status(400).json({ message: 'Página inválida' });
         }

@@ -7,11 +7,13 @@ const router = Router();
 
 const dailyChallenge = new DailyChallengeService();
 
-router.get('/get', auth, async (req: any, res) => {
+router.get('/get/:getNextDay', auth, async (req: any, res) => {
     try {
         const userId = req.user;
 
-        res.status(201).json(await dailyChallenge.get(userId));
+        const getNextDay = req.params.getNextDay == 'true';
+
+        res.status(201).json(await dailyChallenge.get(userId, getNextDay));
     } catch (error) {
         return res.status(400).json({ message: error.message });
     }
