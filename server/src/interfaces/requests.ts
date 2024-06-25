@@ -8,8 +8,7 @@ export interface UserRequest {
 
 export interface LoginRequest {
     name: string,
-    password: string,
-    country: ECountry
+    password: string
 }
 
 export interface ProgressRequest {
